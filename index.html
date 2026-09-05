@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Atomix — таблица Менделеева</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">⚛️ Atomix</div>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="periodic">Таблица</button>
+    <button class="tab-btn" data-tab="community">Пользователи</button>
+  </div>
+</header>
+
+<main id="periodic-view" class="view active">
+  <div class="search-row">
+    <input id="search-input" type="text" placeholder="Поиск по названию, символу, номеру...">
+  </div>
+  <div id="periodic-table" class="periodic-table"></div>
+</main>
+
+<main id="community-view" class="view">
+  <div class="community-header">
+    <h2>Элементы пользователей</h2>
+    <button id="add-element-btn" class="primary-btn">+ Придумать элемент</button>
+  </div>
+  <div class="community-filter">
+    <select id="user-filter">
+      <option value="">Все пользователи</option>
+    </select>
+  </div>
+  <div id="custom-elements-grid" class="custom-elements-grid"></div>
+</main>
+
+<!-- Модалка карточки элемента -->
+<div id="element-modal" class="modal-backdrop hidden">
+  <div class="modal">
+    <button class="modal-close" data-close>&times;</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- Модалка создания своего элемента -->
+<div id="create-modal" class="modal-backdrop hidden">
+  <div class="modal">
+    <button class="modal-close" data-close>&times;</button>
+    <h3>Новый элемент</h3>
+    <form id="create-form">
+      <label>Символ (1-4 символа)
+        <input id="f-symbol" maxlength="4" required placeholder="напр. Zx">
+      </label>
+      <label>Название
+        <input id="f-name" maxlength="40" required placeholder="напр. Зетаксий">
+      </label>
+      <label>Описание
+        <textarea id="f-description" maxlength="300" rows="3" placeholder="Любые свойства/легенда твоего элемента"></textarea>
+      </label>
+      <label>Категория
+        <input id="f-category" maxlength="30" placeholder="напр. фантастический металл">
+      </label>
+      <label>Цвет карточки
+        <input id="f-color" type="color" value="#8e6bff">
+      </label>
+      <button type="submit" class="primary-btn">Создать</button>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

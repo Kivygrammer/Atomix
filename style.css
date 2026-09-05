@@ -1,0 +1,194 @@
+:root {
+  --bg: var(--tg-theme-bg-color, #0f1220);
+  --text: var(--tg-theme-text-color, #eaeaf5);
+  --hint: var(--tg-theme-hint-color, #8b8fa3);
+  --button: var(--tg-theme-button-color, #8e6bff);
+  --button-text: var(--tg-theme-button-text-color, #ffffff);
+  --secondary-bg: var(--tg-theme-secondary-bg-color, #171a2b);
+  --card-bg: #1c2036;
+  --border: #2a2f4a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--secondary-bg);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo { font-weight: 700; font-size: 18px; }
+
+.tabs { display: flex; gap: 6px; }
+
+.tab-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--hint);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.tab-btn.active {
+  background: var(--button);
+  color: var(--button-text);
+  border-color: var(--button);
+}
+
+.view { display: none; padding: 12px; }
+.view.active { display: block; }
+
+.search-row { margin-bottom: 10px; }
+#search-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* ---------- Периодическая таблица ---------- */
+.periodic-table {
+  display: grid;
+  grid-template-columns: repeat(18, minmax(30px, 1fr));
+  gap: 3px;
+  overflow-x: auto;
+}
+
+.el-cell {
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  padding: 2px 3px;
+  font-size: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  color: #08101f;
+  min-width: 28px;
+  transition: transform .1s ease;
+}
+.el-cell:active { transform: scale(0.92); }
+.el-cell .num { font-size: 7px; opacity: .7; }
+.el-cell .sym { font-size: 12px; font-weight: 700; line-height: 1; }
+.el-cell .name { font-size: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.el-cell.marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 700;
+  cursor: default;
+  background: var(--card-bg) !important;
+  color: var(--hint) !important;
+  border: 1px dashed var(--border);
+}
+
+.el-cell.dim { opacity: 0.25; }
+
+/* Цвета категорий */
+.cat-alkali { background:#ff8a80; }
+.cat-alkaline-earth { background:#ffcc80; }
+.cat-transition { background:#ffe082; }
+.cat-post-transition { background:#c5e1a5; }
+.cat-metalloid { background:#80cbc4; }
+.cat-nonmetal { background:#81d4fa; }
+.cat-halogen { background:#b39ddb; }
+.cat-noble-gas { background:#f48fb1; }
+.cat-lanthanide { background:#bcaaa4; }
+.cat-actinide { background:#90a4ae; }
+.cat-unknown { background:#cfd8dc; }
+.cat-custom { background:#8e6bff; color:#fff; }
+
+/* ---------- Модалка ---------- */
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex; align-items: flex-end; justify-content: center;
+  z-index: 20;
+}
+.modal-backdrop.hidden { display: none; }
+
+.modal {
+  background: var(--secondary-bg);
+  border-radius: 16px 16px 0 0;
+  padding: 20px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute; top: 10px; right: 14px;
+  background: none; border: none; color: var(--hint);
+  font-size: 22px; cursor: pointer;
+}
+
+.el-big-symbol {
+  font-size: 46px; font-weight: 800; line-height: 1;
+}
+.el-title { font-size: 20px; font-weight: 700; margin: 4px 0 2px; }
+.el-sub { color: var(--hint); font-size: 13px; margin-bottom: 12px; }
+.el-props { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.el-prop { background: var(--card-bg); border-radius: 10px; padding: 8px 10px; }
+.el-prop .label { font-size: 11px; color: var(--hint); }
+.el-prop .value { font-size: 14px; font-weight: 600; }
+
+/* ---------- Community / пользовательские элементы ---------- */
+.community-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.community-header h2 { font-size: 16px; margin: 0; }
+
+.primary-btn {
+  background: var(--button); color: var(--button-text);
+  border: none; border-radius: 10px; padding: 8px 14px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+}
+
+.community-filter { margin-bottom: 10px; }
+#user-filter {
+  width: 100%; padding: 8px; border-radius: 8px;
+  background: var(--card-bg); color: var(--text); border: 1px solid var(--border);
+}
+
+.custom-elements-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.custom-card {
+  background: var(--card-bg); border-radius: 12px; padding: 10px;
+  border-left: 6px solid var(--button);
+  cursor: pointer;
+}
+.custom-card .sym { font-size: 22px; font-weight: 800; }
+.custom-card .name { font-size: 13px; font-weight: 600; margin: 2px 0; }
+.custom-card .author { font-size: 11px; color: var(--hint); }
+
+.empty-state { color: var(--hint); text-align: center; padding: 30px 10px; font-size: 13px; }
+
+form { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+form label { font-size: 12px; color: var(--hint); display: flex; flex-direction: column; gap: 4px; }
+form input, form textarea {
+  padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--card-bg); color: var(--text); font-size: 14px;
+}
